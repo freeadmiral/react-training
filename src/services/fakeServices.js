@@ -1,4 +1,3 @@
-import * as genreAPI from "./fakeGenreServices";
 
 const movies =[
     {

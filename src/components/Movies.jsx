@@ -41,14 +41,7 @@ class Movies extends Component{
         this.setState({selectedGenre:genre,currentPage:1});
     };
 
-    handleSorting=(path)=>{
-        const sortedItem={...this.state.sortedItem};
-        if(sortedItem.path===path){
-            sortedItem.order=sortedItem.order==='asc' ? 'desc' : 'asc';
-        }else{
-            sortedItem.path=path;
-            sortedItem.order='asc';
-        }
+    handleSorting=(sortedItem)=>{
         this.setState({sortedItem});
     };
 
@@ -58,8 +51,7 @@ class Movies extends Component{
         
         if (count===0) return <p>There are no movies</p>;
 
-        const filtered=selectedGenre && selectedGenre.id ? allMovies.filter
-        (m=>m.genre.id===selectedGenre.id) : allMovies;
+        const filtered=selectedGenre && selectedGenre.id ? allMovies.filter(m=>m.genre.id===selectedGenre.id) : allMovies;
 
         const sortedMovies= _.orderBy(filtered,[sortedItem.path],[sortedItem.order]);
 
@@ -79,6 +71,7 @@ class Movies extends Component{
              onLike={this.handleLike}
              movies={movies} 
              onSorted={this.handleSorting}
+             sortedItem={sortedItem}
               />
             <Pagination 
                 itemsCount={filtered.length}

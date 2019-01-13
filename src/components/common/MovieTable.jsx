@@ -1,42 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Like from './Like';
+import TableHeader from './TableHeader';
 
-const MovieList = (props) => {
-    const {onDelete,onLike,movies,onSorted}=props;
-    return (
-
-        <table className="table">
-                <thead>
-                    <tr>
-                        <th onClick={()=>onSorted('title')}>Title</th>
-                        <th onClick={()=>onSorted('genre.name')}>Genre</th>
-                        <th onClick={()=>onSorted('stock')}>Stock</th>
-                        <th onClick={()=>onSorted('rate')}>Rate</th>
-                        <th/>
-                        <th/>
-                    </tr>
-                </thead>
-                <tbody>
-                    {movies.map(movie=>(
-                        <tr key={movie._id}>
-                        <td>{movie.title}</td>
-                        <td>{movie.genre.name}</td>
-                        <td>{movie.stock}</td>
-                        <td>{movie.rate}</td>
-                        <td>
-                            <Like liked={movie.liked} onLiked={()=>onLike(movie)} />
-                        </td>
-                        <td>
-                            <button 
-                            onClick={()=>onDelete(movie)} className="btn btn-danger btn-sm">
-                            Delete
-                            </button>
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-            </table>
-      );
+class MovieTable extends Component {
+     columns=[
+        {path:'title',label:'Title'},
+        {path:'genre.name',label:'Genre'},
+        {path:'stock',label:'Stock'},
+        {path:'rate',label:'Rate'},
+        {key:'like'},
+        {key:'delete' }
+    ];
+    render() { 
+        const {onDelete,onLike,movies,sortedItem,onSorted}=this.props;
+        return (
+            <table className="table">
+                    <TableHeader columns={this.columns} sortedItem={sortedItem} onSorted={onSorted}/>
+                    <tbody>
+                        {movies.map(movie=>(
+                            <tr key={movie._id}>
+                            <td>{movie.title}</td>
+                            <td>{movie.genre.name}</td>
+                            <td>{movie.stock}</td>
+                            <td>{movie.rate}</td>
+                            <td>
+                                <Like liked={movie.liked} onLiked={()=>onLike(movie)} />
+                            </td>
+                            <td>
+                                <button 
+                                onClick={()=>onDelete(movie)} className="btn btn-danger btn-sm">
+                                Delete
+                                </button>
+                            </td>
+                        </tr>
+                        ))}
+                    </tbody>
+                </table>
+          );
+    }
 }
  
-export default MovieList;
+export default MovieTable;
