@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Input from './Input';
 
 class LoginForm extends Component {
-
   state = {
     account: { username: "", password: "" }
   };
@@ -28,7 +27,7 @@ class LoginForm extends Component {
           <Input name="username" value={account.username} onChange={this.handleChange} label="Username" />
           <small id="emailHelp" className="form-text text-muted">
             We'll never share your email with anyone else.
-            </small>
+            </small >
           <Input name="password" value={account.password} onChange={this.handleChange} label="Password" />
           <button type="submit" className="btn btn-primary">
             Login
