@@ -8,6 +8,7 @@ import NotFound from "./components/NotFound";
 import Navbar from "./components/common/Navbar";
 import MovieForm from "./components/MovieForm";
 import LoginForm from "./components/common/LoginForm";
+import RegisterForm from "./components/common/RegisterForm";
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route path="/rentals" component={Rentals} />
             <Route path="/not-found" component={NotFound} />
             <Route path="/login" component={LoginForm} />
+            <Route path="/register" component={RegisterForm} />
             <Redirect from="/" exact to="/movies" />
             <Redirect to="/not-found" />
           </Switch>
