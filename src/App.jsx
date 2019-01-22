@@ -9,12 +9,24 @@ import Navbar from "./components/common/Navbar";
 import MovieForm from "./components/MovieForm";
 import LoginForm from "./components/common/LoginForm";
 import RegisterForm from "./components/common/RegisterForm";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import jwtDecode from "jwt-decode";
 
 class App extends Component {
+  state = {};
+
+  componentDidMount = () => {
+    const jwt = localStorage.getItem("token");
+    const user = jwtDecode(jwt);
+    this.setState({ user });
+  };
+
   render() {
     return (
       <React.Fragment>
-        <Navbar />
+        <ToastContainer />
+        <Navbar user={this.state.user} />
         <div className="content">
           <Switch>
             <Route path="/movies/:id" component={MovieForm} />

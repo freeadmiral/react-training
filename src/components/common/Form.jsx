@@ -62,7 +62,7 @@ class Form extends Component {
       <Input
         placeholder={"Enter " + name}
         name={name}
-        value={data.name}
+        value={data[name]}
         onChange={this.handleChange}
         errors={errors[name]}
         label={label}
